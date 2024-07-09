@@ -1,0 +1,13 @@
+INDICES.csv
+NFO.csv
+BFO.csv
+Multi_strategy_bot/
+instrument_data/ 
+credentials.json
+__pycache__/
+__pycache__
+git_config
+data_ema.json
+strategy_initializer/__pycache__
+Ratio_data
+*.pyc
