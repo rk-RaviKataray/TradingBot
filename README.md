@@ -14,7 +14,7 @@ This is a fully automated trading bot designed for executing intraday options st
 8. **PNL Graphs**: Visualize profit and loss graphs similar to TradingView for overall strategies and individual instruments.
 9. **Logging**: Collect detailed logs at the individual instrument level.
 10. **Multi-processing and Multi-threading**: Use advanced techniques to reduce latency.
-11. **Find all the instruments traded logs and graph data in `/instrument_data` folder
+11. **Find all the instruments traded logs and graph data in `/instrument_data` folder.**
 
 ## Getting Started
 
