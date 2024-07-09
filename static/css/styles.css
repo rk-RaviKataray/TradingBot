@@ -1,0 +1,15 @@
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 9999;
+  }
+  
+#popup button {
+    display: block;
+    margin-top: 10px;
+  }

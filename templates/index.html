@@ -1,0 +1,109 @@
+{% extends "index_header.html" %}
+{% block body %}
+
+
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='charts.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='positional_data.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='hold_atm_feedback.js') }}"></script>
+
+<style>
+  #popup, #popup_positional_data {
+    position: fixed;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 850px;
+    background-color: #fff;
+    cursor: grab;
+    border: 1px solid rgb(16, 15, 15);
+    padding: 10px;
+    z-index: 9999;
+  }
+  
+  #popup button {
+    display: block;
+    margin-top: 10px;
+  }
+
+  button {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    cursor: pointer;
+    margin: 0 ;
+    line-height: 15px;
+    
+  }
+
+  #buy-button,#increment-atm { 
+      background-color: #007bff;
+      color: #fff;
+  }
+
+  #sell-button,#square-off-button,#decrement-atm {
+      background-color: #dc3545;
+      color: #fff;
+  }
+
+
+  #pnl_graph_button {
+      background-color: #8f8f8f; 
+      color: #fff;
+  }
+
+
+  #positional_data_button {
+      background-color: #8f8f8f;
+      color: #fff;
+  }
+
+button:active {
+  
+  transform: translateY(4px);
+}
+
+
+</style>
+
+
+<body onload="update_values();">
+<h1><center>DASHBOARD ({{ strategy_name }})</center></h1> 
+<p>
+  
+    <span id="summary">?</span>
+    <h4 ><center>INDIVIDUAL INSTRUMENT DATA </center></h4>  
+    
+
+    <span id="result">?</span>
+
+
+    <div id="popup"  style="display: none;">
+      <div id="popup-content"></div>
+    <button onclick="hidePopup()">Close</button>
+    </div>
+
+
+    <div id="popup_positional_data"  style="display: none;">
+        <div id="popup-content-positional_data"></div>
+    <button onclick="hidePopup_positionalData()">Close</button>
+    </div>
+
+
+<script>
+document.getElementById("summary").innerHTML;
+document.getElementById("result").innerHTML;
+</script>
+
+
+  <h8><span id="time" ></span></h8> 
+	</body>
+
+{% endblock %}
+
+
+
+

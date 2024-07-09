@@ -1,0 +1,81 @@
+{
+    "NIFTY":
+    {
+      "Exchange":"NSE",
+      "Hedge_strikes_away_from_atm": 900,
+      "Token":26000,
+      "Strike_difference": 50,
+      "Priority":1,
+      "Delta":[0.3],
+      "Interest_rate":10,
+      "OTM_quantity":50
+  
+    },
+  
+  
+    "BANKNIFTY":
+    {
+      "Exchange":"NSE",
+      "Hedge_strikes_away_from_atm": 1500,
+      "Token": 26009,
+      "Strike_difference": 100,
+      "Priority":2,
+      "Delta":[0.3],
+      "Interest_rate":10,
+      "OTM_quantity":50
+  
+    },
+  
+  
+    "FINNIFTY":
+    {
+      "Exchange":"NSE",
+      "Hedge_strikes_away_from_atm": 500,
+      "Token": 26037,
+      "Strike_difference": 50,
+      "Priority":3,
+      "Delta":[0.3],
+      "Interest_rate":10,
+      "OTM_quantity":50
+  
+    },
+  
+  
+    "SENSEX":
+    {
+      "Exchange":"BSE",
+      "Hedge_strikes_away_from_atm": 1100,
+      "Token": 1,
+      "Strike_difference": 100,
+      "Priority":4,
+      "Delta":[0.3],
+      "Interest_rate":10,
+      "OTM_quantity":125
+    },
+  
+  
+    "BANKEX":
+    {
+      "Exchange":"BSE",
+      "Hedge_strikes_away_from_atm": 1000,
+      "Token": 12,
+      "Strike_difference": 100,
+      "Priority":6,
+      "Delta":[0.3],
+      "Interest_rate":10,
+      "OTM_quantity":50
+    },
+  
+  
+    "MIDCPNIFTY":
+    {
+      "Exchange":"NSE",
+      "Hedge_strikes_away_from_atm": 300,
+      "Token": 26074,
+      "Strike_difference": 25,
+      "Priority":5,
+      "Delta":[0.3],
+      "Interest_rate":10,
+      "OTM_quantity":50
+    }
+  }

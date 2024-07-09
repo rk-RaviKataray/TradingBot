@@ -1,0 +1,305 @@
+{% extends "dy0.html" %}
+{% block body %}
+<style>
+  #popup, #popup_positional_data {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 850px;
+    background-color: #fff;
+    cursor: grab;
+    border: 1px solid rgb(16, 15, 15);
+    padding: 10px;
+    z-index: 9999;
+  }
+  
+  #popup button {
+    display: block;
+    margin-top: 10px;
+  }
+
+</style>
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+
+
+<script type="text/javascript">
+var intervalID = setInterval(update_values,1000);
+
+  async function update_values() {
+
+        $.getJSON('https://white-analyst-jjajl.ineuron.app:5000/_stuff',
+               
+      function(data) {
+       
+
+        //$('#delta_dict_expected').text(JSON.stringify(data.result['delta_dict_expected']));
+        //$('#delta_dict_current').text(JSON.stringify(data.result['delta_dict_current']));
+
+        //$('#delta_dict_expected').html(data.result['delta_dict_expected']);
+        //$('#delta_dict_actual').html(data.result['delta_dict_actual']);
+
+        $('#summary').html(data.result['summary_html']);
+        $('#result').html(data.result['individual_html']);
+        
+      });
+
+      displayISTTime()
+      
+    };
+   
+    
+    
+    function stopTextColor() {
+      clearInterval(intervalID);
+    }
+
+  let stopLoop = false;
+
+  async function fetchHistoricData(fileName) {
+        async function updateHistoricData(fileName) {
+          while(!stopLoop){
+            await new Promise(r => setTimeout(r, 62000));
+            
+
+            const fullFileName = "https://white-analyst-jjajl.ineuron.app:5000/api/candle_data/" + fileName ;
+
+            const response = await fetch(fullFileName);
+            const text = await response.text();
+
+            // Split the text into individual JSON objects (lines)
+            const lines = text.trim().split("\n");
+            const lin = lines.slice(-1)[0];
+
+            // Parse each JSON object and create an array of data points
+        
+            const historicData = JSON.parse(lin);
+            const candlestickSeries = chart.addCandlestickSeries();
+            
+            candlestickSeries.update(historicData);
+
+          }
+        }
+
+
+      const chart = LightweightCharts.createChart(document.getElementById('popup-content'), {
+        width: 800,
+        height: 600,
+        watermark:{
+            color: 'rgba(0, 0, 0, 1)', // Watermark text color
+            fontSize: 16,                  // Watermark font size
+            horzAlign: 'left',           // Horizontal alignment: 'left', 'center', or 'right'
+            vertAlign: 'top',           // Vertical alignment: 'top', 'middle', or 'bottom'
+            visible: true,                 // Set to false to hide the watermark
+            text: fileName,             // Watermark text
+        },
+        crosshair: {
+          mode: LightweightCharts.CrosshairMode.Normal,
+          vertLine: {
+            width: 8,
+            color: '#C3BCDB44',
+            style: LightweightCharts.LineStyle.Solid,
+            labelBackgroundColor: '#9B7DFF',
+      },
+
+          // Horizontal crosshair line (showing Price in Label)
+          horzLine: {
+            color: '#9B7DFF',
+            labelBackgroundColor: '#9B7DFF',
+          },
+        },
+        timeScale: {
+            borderColor: 'rgba(197, 203, 206, 0.8)',
+            timeVisible: true,
+            secondsVisible: true,
+        },
+        
+        });
+
+    
+      try {
+        
+        const myArray = fileName;
+
+        //document.getElementById("chart_name").innerHTML = fileName; 
+        // Replace 'historic_data.jsonl' with the path to your JSONL file
+        const fullFileName = "https://white-analyst-jjajl.ineuron.app:5000/api/candle_data/" + fileName ;
+        const response = await fetch(fullFileName);
+        const text = await response.text();
+
+        // Split the text into individual JSON objects (lines)
+        const lines = text.trim().split("\n");
+        //console.log(lines)
+
+        // Parse each JSON object and create an array of data points
+        const historicData = lines.map((line) => JSON.parse(line));
+        
+        const candlestickSeries = chart.addCandlestickSeries();
+
+        console.log(historicData)
+  
+        candlestickSeries.setData(historicData);
+
+
+        updateHistoricData(fileName)
+
+
+      } catch (error) {
+        console.error("Error fetching historic data:", error);
+      }
+
+
+     
+
+   }
+
+
+    async function showPopup(file) {
+
+    stopLoop = false;
+    fetchHistoricData(file)
+    showElement('popup');
+    }
+
+
+    async function hidePopup() {
+    hideElement('popup');
+    }
+
+    async function showElement(id) {
+    var element = document.getElementById(id);
+    element.style.display = 'block';
+    }
+
+    async function hideElement(id) {
+    var element = document.getElementById(id);
+
+    element.style.display = 'none';
+    element.innerHTML = ' <div id="popup-content"> </div> <button onclick="hidePopup()">Close</button> ' ;
+    stopLoop = true;
+
+
+}
+
+function displayISTTime() {
+    const ISTOffset = 3.5 * 60 * 60 * 1000; // IST offset in milliseconds (5 hours 30 minutes)
+    const now = new Date();
+    const ISTTime = new Date(now.getTime() + ISTOffset);
+
+    const hours = ISTTime.getHours().toString().padStart(2, '0');
+    const minutes = ISTTime.getMinutes().toString().padStart(2, '0');
+    const seconds = ISTTime.getSeconds().toString().padStart(2, '0');
+
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    document.getElementById('time').innerText = timeString;
+}
+
+//
+
+async function fetchPositionalData(fileName) {
+    try {
+        
+        const myArray = fileName;
+
+        //document.getElementById("chart_name").innerHTML = fileName; 
+        // Replace 'historic_data.jsonl' with the path to your JSONL file
+        const fullFileName = "https://white-analyst-jjajl.ineuron.app:5000/api/position_data/" + fileName ;
+        const response = await fetch(fullFileName);
+        const text = await response.text();
+
+        // Split the text into individual JSON objects (lines)
+        const lines = text.trim().split("\n");
+        console.log(lines)
+
+        const popup_content_positional_data= document.getElementById("popup-content-positional_data");
+        // popup_content_positional_data.textContent = lines;
+
+        // Create a scrollable container for the log entries
+    const scrollableDiv = document.createElement('div');
+    scrollableDiv.style.overflowY = 'scroll';
+    scrollableDiv.style.height = '600px';
+
+    popup_content_positional_data.appendChild(scrollableDiv);
+
+        lines.forEach(entry => {
+        const logDiv = document.createElement('div');
+        logDiv.textContent = entry; // Set the text content of the div to the log entry
+        scrollableDiv.appendChild(logDiv); // Append the div to the container
+    });
+    
+
+      } catch (error) {
+        console.error("Error fetching historic data:", error);
+      }
+
+
+   }
+
+async function showPopup_positionalData(file) {
+
+    //stopLoop = false;
+    fetchPositionalData(file)
+    showElement_positionalData('popup_positional_data');
+    }
+
+
+async function hidePopup_positionalData() {
+  hideElement_positionalData('popup_positional_data');
+    }
+
+async function showElement_positionalData(id) {
+    var element = document.getElementById(id);
+    element.style.display = 'block';
+    }
+
+async function hideElement_positionalData(id) {
+    var element = document.getElementById(id);
+
+    element.style.display = 'none';
+    element.innerHTML = ' <div id="popup-content-positional_data"> </div> <button onclick="hidePopup_positionalData()">Close</button> ' ;
+    //stopLoop = true;
+  }
+
+
+</script>
+
+
+<body onload="update_values();">
+<h1><center>DASHBOARD(15Min)</center></h1> 
+<p>
+    <span id="delta_dict_expected">?</span>
+    <span id="delta_dict_current">?</span>
+
+    <span id="summary">?</span>
+    <h4 ><center>INDIVIDUAL INSTRUMENT DATA </center></h4>  
+
+    <span id="result">?</span>
+
+
+    <div id="popup"  style="display: none;">
+      <div id="popup-content"></div>
+    <button onclick="hidePopup()">Close</button>
+    </div>
+
+
+    <div id="popup_positional_data"  style="display: none;">
+        <div id="popup-content-positional_data"></div>
+    <button onclick="hidePopup_positionalData()">Close</button>
+    </div>
+
+
+<script>
+document.getElementById("summary").innerHTML;
+document.getElementById("result").innerHTML;
+</script>
+
+	<button onclick="stopTextColor();">Stop</button>
+  <h8><span id="time" ></span></h8>
+	</body>
+
+{% endblock %}
+
+
+
+
