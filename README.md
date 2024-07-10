@@ -96,7 +96,7 @@ This is a fully automated trading bot designed for executing intraday options st
 
 ## Screenshots
 
-![Screenshot 1](screenshots/architecture_github_sc.png)
+![Screenshot 1](screenshots/architecture_github_sc1.png)
 *Architecture*
 
 ![Screenshot 2](screenshots/flow_chart.png)
