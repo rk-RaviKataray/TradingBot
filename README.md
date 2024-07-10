@@ -2,6 +2,15 @@
 
 This is a fully automated trading bot designed for executing intraday options strategies on exchanges like NSE and BSE. The bot currently supports the Alice Blue broker.
 
+## Indices Supported
+
+1. **NIFTY**
+2. **BANKNIFTY**
+3. **FINNIFTY**
+4. **MIDCPNIFTY**
+5. **SENSEX**
+6. **BANKEX**
+
 ## Application Features
 
 1. **Time-based Entry and Exit**: Automate trade entry and exit based on specific times.
@@ -43,6 +52,27 @@ This is a fully automated trading bot designed for executing intraday options st
     API_KEY = 'your_api_key'
     ```
 
+### Configuration
+
+1. Change the `Configuration_file` as per your requirements:
+
+ ```python
+    # Example config file with explanation
+     "NIFTY":
+    {
+      "Exchange":"NSE",                       # valid_input: NSE/BSE 
+      "Hedge_strikes_away_from_atm": 900,     # 900 points away from ATM strikes will be bought
+      "Token":26000,
+      "Strike_difference": 50,                
+      "Priority":1,                           # In case of colliding expiries the instrument with higher priority will be chosen
+      "Delta":[0.3],                          # strikes with 0.3 delta call will be shorted and maintained as per the market movement
+      "Interest_rate":10,
+      "OTM_quantity":50                       # quantity in lots 
+  
+    },
+ ```
+
+2.
 ### Usage
 
 1. Run the bot:
