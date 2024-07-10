@@ -2,6 +2,17 @@
 
 This is a fully automated trading bot designed for executing intraday options strategies on exchanges like NSE and BSE. The bot currently supports the Alice Blue broker.
 
+## Screenshots
+
+![Screenshot 1](screenshots/screenshot1.png)
+*Visualize your trading positions in real-time.*
+
+![Screenshot 2](screenshots/screenshot2.png)
+*PNL graphs similar to TradingView for individual instruments and overall strategy.*
+
+![Screenshot 3](screenshots/screenshot3.png)
+*Detailed logs for each instrument.*
+
 ## Indices Supported
 
 1. **NIFTY**
@@ -85,14 +96,12 @@ This is a fully automated trading bot designed for executing intraday options st
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot1.png)
-*Visualize your trading positions in real-time.*
+![Screenshot 1](screenshots/architecture_github_sc.png)
+*Architecture*
 
-![Screenshot 2](screenshots/screenshot2.png)
-*PNL graphs similar to TradingView for individual instruments and overall strategy.*
+![Screenshot 2](screenshots/flow_chart.png)
+*Control Flow*
 
-![Screenshot 3](screenshots/screenshot3.png)
-*Detailed logs for each instrument.*
 
 ## Contributing
 
