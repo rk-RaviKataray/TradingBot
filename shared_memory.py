@@ -237,4 +237,4 @@ delta_dict_expected = Shared_Memory('delta_dict_expected')
 delta_dict = Shared_Memory('delta_dict')
 
 
-data = DataGenerator(strategy = TradingStrategy.STRANGLE, is_paper_trade = True)
+data = DataGenerator(strategy = TradingStrategy.CALL_RATIO_DELTA , is_paper_trade = True)
