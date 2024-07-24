@@ -113,5 +113,6 @@ Contributions are welcome! Please fork the repository and create a pull request.
 - rk.ravikataray@gmail.com
 - Whatsapp: +46734790860
 
+**Disclaimer:** This project is intended solely for educational purposes. It aims to provide learning experiences and enhance understanding of the subject matter. It is important to note that this project does not guarantee any financial gains or profits if implemented in live markets. Users should be aware that deploying this project in real-world financial markets carries inherent risks, and there is no assurance of achieving successful or profitable outcomes. The project is designed for academic exploration and should not be considered as a tool for financial investment or trading purposes.
 
 
